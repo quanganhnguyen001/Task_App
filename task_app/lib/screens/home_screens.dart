@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app/blocs/bloc/task_bloc.dart';
 import 'package:task_app/models/task.dart';
 
+import '../widget/add_task.dart';
 import '../widget/task_list.dart';
 
 class HomeScreens extends StatelessWidget {
@@ -13,13 +14,7 @@ class HomeScreens extends StatelessWidget {
         context: context,
         builder: (context) {
           return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Column(
-                children: [TextField()],
-              ),
-            ),
+            child: AddTaskScreens(),
           );
         });
   }
@@ -34,7 +29,9 @@ class HomeScreens extends StatelessWidget {
             title: const Text('Tasks App'),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  _addTask(context);
+                },
                 icon: const Icon(Icons.add),
               )
             ],
@@ -53,7 +50,9 @@ class HomeScreens extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              _addTask(context);
+            },
             tooltip: 'Add Task',
             child: const Icon(Icons.add),
           ),

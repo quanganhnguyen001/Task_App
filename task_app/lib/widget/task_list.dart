@@ -19,6 +19,9 @@ class TaskList extends StatelessWidget {
           itemBuilder: (context, index) {
             var task = taskList[index];
             return ListTile(
+              onLongPress: () {
+                context.read<TaskBloc>().add(DeleteTask(task: task));
+              },
               title: Text(task.title),
               trailing: Checkbox(
                 value: task.isDone,

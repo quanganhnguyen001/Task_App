@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_app/blocs/bloc/task_bloc.dart';
+
 import 'package:task_app/models/task.dart';
 import 'package:task_app/screens/drawer_screens.dart';
 
+import '../blocs/task_bloc/task_bloc.dart';
 import '../widget/add_task.dart';
 import '../widget/task_list.dart';
 

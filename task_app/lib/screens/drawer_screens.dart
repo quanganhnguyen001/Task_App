@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_app/blocs/bloc/task_bloc.dart';
+import 'package:task_app/blocs/switch_bloc/switch_bloc.dart';
+
 import 'package:task_app/screens/home_screens.dart';
 import 'package:task_app/screens/recycle_bin.dart';
+
+import '../blocs/task_bloc/task_bloc.dart';
 
 class DrawerScreens extends StatelessWidget {
   const DrawerScreens({Key? key}) : super(key: key);
@@ -25,7 +28,8 @@ class DrawerScreens extends StatelessWidget {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, HomeScreens.name),
+                  onTap: () =>
+                      Navigator.pushReplacementNamed(context, HomeScreens.name),
                   child: ListTile(
                     leading: Icon(Icons.folder_special),
                     title: Text('My Task'),
@@ -41,7 +45,8 @@ class DrawerScreens extends StatelessWidget {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, RecycleBin.name),
+                  onTap: () =>
+                      Navigator.pushReplacementNamed(context, RecycleBin.name),
                   child: ListTile(
                     leading: Icon(Icons.delete),
                     title: Text('Recycle Bin'),
@@ -50,6 +55,17 @@ class DrawerScreens extends StatelessWidget {
                 );
               },
             ),
+            BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return Switch(
+                    value: state.switchValue,
+                    onChanged: (newValue) {
+                      newValue
+                          ? context.read<SwitchBloc>().add(SwitchOnEvent())
+                          : context.read<SwitchBloc>().add(SwitchOffEvent());
+                    });
+              },
+            )
           ],
         ),
       ),

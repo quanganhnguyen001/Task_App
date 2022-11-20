@@ -26,6 +26,7 @@ class TaskTile extends StatelessWidget {
       },
       title: Text(
         task.title,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
             decoration: task.isDone! ? TextDecoration.lineThrough : null),
       ),

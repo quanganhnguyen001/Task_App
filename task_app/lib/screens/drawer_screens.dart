@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app/blocs/switch_bloc/switch_bloc.dart';
 
-import 'package:task_app/screens/home_screens.dart';
+import 'package:task_app/screens/pending_screens.dart';
 import 'package:task_app/screens/recycle_bin.dart';
+import 'package:task_app/screens/tab_screens.dart';
 
 import '../blocs/task_bloc/task_bloc.dart';
 
@@ -29,11 +30,11 @@ class DrawerScreens extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () =>
-                      Navigator.pushReplacementNamed(context, HomeScreens.name),
+                      Navigator.pushReplacementNamed(context, TabScreens.name),
                   child: ListTile(
                     leading: Icon(Icons.folder_special),
                     title: Text('My Task'),
-                    trailing: Text('${state.allTask.length}'),
+                    trailing: Text('${state.pendingTask.length}'),
                   ),
                 );
               },

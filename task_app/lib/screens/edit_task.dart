@@ -5,21 +5,19 @@ import 'package:task_app/services/guid_gen.dart';
 import '../blocs/task_bloc/task_bloc.dart';
 import '../models/task.dart';
 
-class AddTaskScreens extends StatefulWidget {
-  AddTaskScreens({
+class EditTaskSCreens extends StatelessWidget {
+  EditTaskSCreens({
     Key? key,
+    required this.oldTask,
   }) : super(key: key);
-
-  @override
-  State<AddTaskScreens> createState() => _AddTaskScreensState();
-}
-
-class _AddTaskScreensState extends State<AddTaskScreens> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final Task oldTask;
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _titleController =
+        TextEditingController(text: oldTask.title);
+    TextEditingController _descriptionController =
+        TextEditingController(text: oldTask.description);
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -28,7 +26,7 @@ class _AddTaskScreensState extends State<AddTaskScreens> {
         child: Column(
           children: [
             Text(
-              'Add Task',
+              'Edit Task',
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(
@@ -65,14 +63,19 @@ class _AddTaskScreensState extends State<AddTaskScreens> {
                     child: Text('Cancel')),
                 ElevatedButton(
                     onPressed: () {
-                      var task = Task(
+                      var editTask = Task(
                           title: _titleController.text,
-                          id: GUIDGen.generate(),
-                          description: _descriptionController.text);
-                      context.read<TaskBloc>().add(AddTask(task: task));
+                          id: oldTask.id,
+                          isDone: false,
+                          isFavorite: oldTask.isFavorite,
+                          description: _descriptionController.text,
+                          date: DateTime.now().toString());
+                      context
+                          .read<TaskBloc>()
+                          .add(EditTask(oldTask: oldTask, newTask: editTask));
                       Navigator.pop(context);
                     },
-                    child: Text('Add')),
+                    child: Text('Save')),
               ],
             ),
           ],

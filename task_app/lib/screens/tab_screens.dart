@@ -4,7 +4,7 @@ import 'package:task_app/screens/drawer_screens.dart';
 import 'package:task_app/screens/favourite_task.dart';
 import 'package:task_app/screens/pending_screens.dart';
 
-import '../widget/add_task.dart';
+import 'add_task.dart';
 
 class TabScreens extends StatefulWidget {
   TabScreens({Key? key}) : super(key: key);
